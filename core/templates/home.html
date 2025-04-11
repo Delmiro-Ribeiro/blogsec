@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
+    crossorigin="anonymous">
+    <title>BlogSec.com | Dicas de Cibersegurança</title>
+</head>
+<body>
+    <ul class="nav nav-tabs" style="background-color: #5e5858; color: #fff;">
+        <li class="nav-item" style="background-color: #5e5858; color: #fff;">
+          <a class="nav-link active" href="{%url 'home'%}">BlogSec.com.br | Dicas de Cibersegurança</a>
+        </li>
+        <li class="nav-item dropdown" style="background-color: #5e5858; color: #fff;">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff;">Contato</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="https://www.instagram.com/dev_miro/?hl=pt-br" target="_blank">Instagram</a>
+            <a class="dropdown-item" href="https://www.linkedin.com/in/delmiro-ribeiro-7452411a0/" target="_blank">Linkedin</a>
+            <a class="dropdown-item" href="https://github.com/Delmiro-Ribeiro" target="_blank">Github</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="mailto:delmiroribeiro.alpha@gmail.com" target="_blank">Email</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" style="color: #fff;">Quem Somos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Desativado</a>
+        </li>
+      </ul>
+
+      <br><br>
+      <div class="container">
+        {% for post in object_list %}
+        <div class="media mb-4">
+            <div class="media-body">
+                <h5 class="mt-0 mb-1">
+                    <a href="{% url 'article_details' post.pk %}" style="color: black; font-weight: bold; font-size: 25px;">
+                        {{ post.title | safe }}
+                    </a>
+                </h5>
+                <small>Por: {{ post.author | safe }}</small><br/>
+                <small>Em: {{ post.created_at|date:"d/m/Y" }}</small>
+                <hr>
+                <p>{{ post.summary | truncatewords:30 }}</p>
+            </div>
+            <img src="{{ post.imagem.url }}" alt="Imagem do artigo" class="img-thumbnail ml-4" style="width: 150px; height: auto;">
+        </div>
+        {% endfor %}
+    </div>
+                <br/>
+
+              <div class="pagination" style="display: flex;justify-content: center;align-items: center ;text-align: center;">
+              <span class="step-links" style="display: flex;justify-content: center;align-items: center ;text-align: center;">
+                  
+                <!--{% if page_obj.has_previous %}
+                      <a href="?page=1" style="margin-left: 10px;">&laquo; primeira</a>
+                      <a href="?page={{ page_obj.previous_page_number }}" style="margin-left: 10px;">anterior</a>
+                  {% endif %}-->
+                  {% if page_obj.has_previous %}
+                      <!--<a href="?page=1" style="margin-left: 10px;">&laquo; primeira</a>-->
+                      <a href="?page={{ page_obj.previous_page_number }}" style="margin-left: 10px;">anterior</a>
+                  {% endif %}
+          
+                  <span class="current" style="margin: 0 15px;">
+                      Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                  </span>
+          
+                  {% if page_obj.has_next %}
+                      <a href="?page={{ page_obj.next_page_number }}" style="margin-left: 10px;">próxima</a><p> </p>                     
+                      <!--<a href="?page={{ page_obj.paginator.num_pages }}" style="margin-left: 10px;">última &raquo;</a>-->
+                  {% endif %}
+              </span>
+          </div>
+       
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
