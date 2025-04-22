@@ -1,0 +1,12 @@
+.container {
+    line-height: 1.6; /* Aumenta o espaçamento entre linhas */
+}
+
+.content p {
+    margin-bottom: 1rem; /* Adiciona espaçamento entre parágrafos */
+}
+
+img {
+    max-width: 100%; /* Garante que a imagem não ultrapasse o tamanho do contêiner */
+    height: auto;
+}
